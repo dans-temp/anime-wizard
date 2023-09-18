@@ -1,8 +1,26 @@
 /* styles.css */
 
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    /* Set the background image */
+    background-image: url('./assets/cool-background.png');
+    background-size: cover;
+    background-position: fixed;
+
+    /* Set the background overlay color and opacity */
+    position: relative;
+    z-index: 1;
+    color: white;
+  }
+
+
+/* styles.css */
+
 /* Center the page container */
 .page-container {
-    height: 100vh;
+    height: 100%;
     text-align: center;
     font-family: 'Mooli', sans-serif;
     padding-left: 15px;
@@ -16,6 +34,10 @@
     margin-bottom: 20px;
     font-family: 'Croissant One', sans-serif !important; 
     font-size: 64px;
+  }
+
+  .wizard-image {
+    width: 20%;
   }
   
   /* Style the input field for the image URL */
@@ -44,6 +66,17 @@
 
   }
 
+  .try-button {
+    width: 200px;
+    font-size: 20px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: 0px;
+    height: 43px; /* Set the height to match the input field */
+    border-radius: 10px;
+  }
+
   .row-form {
     display: flex;
     align-items: center;
@@ -62,10 +95,16 @@
   }
 
   .loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 30px;
+    z-index: 9999; /* Ensure it's on top of other content */
   }
   
   .loader {
@@ -84,7 +123,7 @@
 }
 
 .video-player {
-    width: 33%;
+    width: 40%;
 }
 
 .button-container {
@@ -94,11 +133,11 @@
   
   .yes-button {
     border-top-left-radius: 10px;
-    margin-left: 33.5%;
+    margin-left: 30%;
   }
   .no-button {
     border-top-right-radius: 10px;
-    margin-right: 33.5%;
+    margin-right: 30%;
   }
   .yes-button,
   .no-button {
@@ -108,11 +147,15 @@
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
-    width: 12%;
+    width: 15%;
   }
 
   
   @media (max-width: 768px) {
+
+    .wizard-image {
+        width: 90%;
+      }
     .url-input {
         max-width: 200px;
     }
@@ -133,7 +176,8 @@
   .yes-button:hover,
   .no-button:hover, 
   .upload-button:hover,
-  .submit-button:hover {
+  .submit-button:hover,
+  .try-button:hover {
     background-color: hsl(235, 96%, 56%);
     
   }

@@ -1,6 +1,9 @@
 import React, { useRef, useState, useEffect} from 'react';
 import axios from 'axios';
 import './styles.css';
+import wizardStart from './assets/wizard-start.png';
+import wizardFailure from './assets/wizard-failure.png';
+import wizardSuccess from './assets/wizard-success.png';
 
 function ImageUploader() {
   const inputFileRef = useRef(null);
@@ -8,13 +11,33 @@ function ImageUploader() {
   const [animeInfo, setAnimeInfo] = useState(null); // State to store API response
   const [loading, setLoading] = useState(false);
   const [newData, setNewData] = useState(0);
+  const [failure, setFailure] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [guesses, setGuesses] = useState(0);
 
   
 
+  function filter_data(response)
+  {
+    const already_named = [];
+    let result_data_filtered = [];
+    outerLoop: for (const anime of response.data.result)
+    {
+      for (const named of already_named)
+      {
+        if (anime.anilist.title.english === named || anime.anilist.isAdult)
+        {
+          continue outerLoop;
+        }
+      }
+      already_named.push(anime.anilist.title.english);
+      result_data_filtered.push(anime);
+    }
+    return(result_data_filtered);
+  }
+
   const handleImageUpload = async () => {
     const selectedFile = inputFileRef.current.files[0];
-    console.log(selectedFile);
 
     if (selectedFile) {
       try {
@@ -22,24 +45,9 @@ function ImageUploader() {
         const formData = new FormData();
         formData.append('image', selectedFile);
         const response = await axios.post('https://api.trace.moe/search?&cutBorders&anilistInfo', formData);
-        const already_named = [];
-        let result_data_filtered = [];
-        outerLoop: for (const anime of response.data.result)
-        {
-          for (const named of already_named)
-          {
-            if (anime.anilist.title.english === named)
-            {
-              continue outerLoop;
-            }
-          }
-          already_named.push(anime.anilist.title.english);
-          result_data_filtered.push(anime);
-        }
-  
         setNewData(prevKey => prevKey + 1);
         // Handle the response here (e.g., display anime information).
-        setAnimeInfo(result_data_filtered);
+        setAnimeInfo(filter_data(response));
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -63,7 +71,7 @@ function ImageUploader() {
       axios
         .get(`https://api.trace.moe/search?cutBorders&anilistInfo&url=${imageUrl}`)
         .then((response) => {
-          setAnimeInfo(response.data.result);
+          setAnimeInfo(filter_data(response));
           setNewData(prevKey => prevKey + 1);
           setLoading(false);
         })
@@ -77,18 +85,32 @@ function ImageUploader() {
     // Increment the 'guesses' variable by 1
     if(guesses +1 < animeInfo.length)
     {
-      console.log(animeInfo.anilist);
       setGuesses(guesses + 1);
     }
+    else
+    {
+      setAnimeInfo(null);
+      setGuesses(0);
+      setFailure(true);
+    }
   };
+
+  function victory()
+  {
+    setAnimeInfo(null);
+    setGuesses(0);
+    setSuccess(true);
+  }
 
 
 
   return (
     <div className="page-container">
-      {!animeInfo && (
+      {!animeInfo && !failure && !success && (
         <div>
           <h1 className="title">Anime Wizard</h1>
+          <img className="wizard-image" src={wizardStart} alt="wizard start"></img>
+
           <p>Give me a screenshot from an anime and I will try to guess where it is from!</p>
           <p>Either paste an image URL or upload a screenshot</p>
 
@@ -117,6 +139,24 @@ function ImageUploader() {
           Select Image 📂
           </button>
       </div>
+      )} 
+      {failure && (
+        <div>
+          <h1 className="title">Not this time!</h1>
+          <img className="wizard-image" src={wizardFailure} alt="wizard start"></img>
+          <p>My powers must be fading. Sorry I could't find what you were looking for</p>
+          <p>Would you like to try again?</p>
+            <button className="try-button" onClick={() => setFailure(false)}>Try Again</button>
+        </div>
+      )}
+      {success && (
+        <div>
+          <h1 className="title">I knew it!</h1>
+          <img className="wizard-image" src={wizardSuccess} alt="wizard start"></img>
+          <p>I'm glad I could help friend</p>
+          <p>Want help with anything else?</p>
+            <button className="try-button" onClick={() => setSuccess(false)}>Ask Again</button>
+        </div>
       )}
       {loading && (
       <div className="loader-container">
@@ -128,7 +168,7 @@ function ImageUploader() {
           <h1 className="title">Guess {guesses+1}/{animeInfo.length}</h1>
           <h2>Is the anime {animeInfo[guesses].anilist.title.english}?</h2>
             <div className="button-container">
-            <button className="yes-button">Yes</button>
+            <button className="yes-button" onClick={() => victory()}>Yes</button>
             <button className="no-button" onClick={incrementGuesses}>No</button>
           </div> 
           <video key={guesses} autoPlay muted controls loop className='video-player'>
