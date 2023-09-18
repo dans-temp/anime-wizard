@@ -1,4 +1,6 @@
 {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
   "name": "anime-wizard",
   "version": "0.1.0",
   "private": true,
@@ -35,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
   }
 }
