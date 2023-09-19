@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/anime-wizard/static/css/main.7bc2cfe0.css",
-    "main.js": "/anime-wizard/static/js/main.403e05c6.js",
+    "main.css": "/anime-wizard/static/css/main.ad21120e.css",
+    "main.js": "/anime-wizard/static/js/main.0b3fed91.js",
     "static/js/787.9e8bc09e.chunk.js": "/anime-wizard/static/js/787.9e8bc09e.chunk.js",
     "static/media/wizard-failure.png": "/anime-wizard/static/media/wizard-failure.f982846854afa59dabd2.png",
     "static/media/wizard-start.png": "/anime-wizard/static/media/wizard-start.2148145ce8f2ec5116ca.png",
     "static/media/wizard-success.png": "/anime-wizard/static/media/wizard-success.a0735b76f8b4edf70576.png",
     "static/media/cool-background.png": "/anime-wizard/static/media/cool-background.31fff9cd6ef58151c7f1.png",
     "index.html": "/anime-wizard/index.html",
-    "main.7bc2cfe0.css.map": "/anime-wizard/static/css/main.7bc2cfe0.css.map",
-    "main.403e05c6.js.map": "/anime-wizard/static/js/main.403e05c6.js.map",
+    "main.ad21120e.css.map": "/anime-wizard/static/css/main.ad21120e.css.map",
+    "main.0b3fed91.js.map": "/anime-wizard/static/js/main.0b3fed91.js.map",
     "787.9e8bc09e.chunk.js.map": "/anime-wizard/static/js/787.9e8bc09e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7bc2cfe0.css",
-    "static/js/main.403e05c6.js"
+    "static/css/main.ad21120e.css",
+    "static/js/main.0b3fed91.js"
   ]
 }
