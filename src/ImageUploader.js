@@ -33,6 +33,7 @@ function ImageUploader() {
       already_named.push(anime.anilist.title.english);
       result_data_filtered.push(anime);
     }
+    console.log(result_data_filtered);
     return(result_data_filtered);
   }
 
@@ -59,7 +60,7 @@ function ImageUploader() {
   const handleImageUrlChange = (event) => {
     // Update the imageUrl state when the input field value changes
     // make sure valid url with regex
-    // if(event.target.value.match(new RegExp(/(?:((?:https|http):\/\/)|(?:\/)).+(?:.jpg|jpeg|png|mp4|gif)/gmi))) 
+    if(event.target.value.match(new RegExp(/(?:((?:https|http):\/\/)|(?:\/)).+(?:.jpg|jpeg|png|mp4|gif)/gmi))) 
       setImageUrl(event.target.value);
   };
 
@@ -111,13 +112,13 @@ function ImageUploader() {
           <h1 className="title">Anime Wizard</h1>
           <img className="wizard-image" src={wizardStart} alt="wizard start"></img>
 
-          <p>Give me a screenshot from an anime and I will try to guess where it is from!</p>
+          <p>Give me an <b>uncropped screensho</b>t from an anime and I will try to guess where it is from!</p>
           <p>Either paste an image URL or upload a screenshot</p>
 
           <form className="row-form"onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Enter Image URL"
+              placeholder="Paste a Image URL"
               value={imageUrl}
               onChange={handleImageUrlChange}
               className="url-input"
@@ -153,7 +154,7 @@ function ImageUploader() {
         <div>
           <h1 className="title">I knew it!</h1>
           <img className="wizard-image" src={wizardSuccess} alt="wizard start"></img>
-          <p>I'm glad I could help friend</p>
+          <p>I'm glad I could be of assistance friend</p>
           <p>Want help with anything else?</p>
             <button className="try-button" onClick={() => setSuccess(false)}>Ask Again</button>
         </div>
@@ -166,15 +167,24 @@ function ImageUploader() {
       {animeInfo && !loading && (
         <div key={newData}>
           <h1 className="title">Guess {guesses+1}/{animeInfo.length}</h1>
-          <h2>Is the anime {animeInfo[guesses].anilist.title.english}?</h2>
+          {animeInfo[guesses].anilist.title?.english ? (
+            <h2>Is the anime {animeInfo[guesses].anilist.title.english}
+              {animeInfo[guesses].episode && (
+              <> From episode {animeInfo[guesses].episode}</>
+            )}
+            ?</h2>
+          ) : (
+            <h2>{animeInfo[guesses].filename}?</h2>
+          )}
             <div className="button-container">
             <button className="yes-button" onClick={() => victory()}>Yes</button>
             <button className="no-button" onClick={incrementGuesses}>No</button>
           </div> 
           <video key={guesses} autoPlay muted controls loop className='video-player'>
             <source src={animeInfo[guesses].video} type="video/mp4"></source>
-          </video>        
-            <p></p>
+          </video>
+
+            
         </div>
       )}
     </div>

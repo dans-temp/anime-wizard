@@ -7,12 +7,17 @@ body {
     /* Set the background image */
     background-image: url('./assets/cool-background.png');
     background-size: cover;
-    background-position: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
 
     /* Set the background overlay color and opacity */
     position: relative;
     z-index: 1;
     color: white;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+   
   }
 
 
@@ -92,6 +97,7 @@ body {
     border: none;
     cursor: pointer;
     border-radius: 10px;
+
   }
 
   .loader-container {
@@ -152,7 +158,9 @@ body {
 
   
   @media (max-width: 768px) {
-
+    .title {
+      font-size: 38px;
+    }
     .wizard-image {
         width: 90%;
       }
