@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/anime-wizard/static/css/main.ad21120e.css",
+    "main.css": "/anime-wizard/static/css/main.f78cc8d8.css",
     "main.js": "/anime-wizard/static/js/main.0b3fed91.js",
     "static/js/787.9e8bc09e.chunk.js": "/anime-wizard/static/js/787.9e8bc09e.chunk.js",
     "static/media/wizard-failure.png": "/anime-wizard/static/media/wizard-failure.f982846854afa59dabd2.png",
@@ -8,12 +8,12 @@
     "static/media/wizard-success.png": "/anime-wizard/static/media/wizard-success.a0735b76f8b4edf70576.png",
     "static/media/cool-background.png": "/anime-wizard/static/media/cool-background.31fff9cd6ef58151c7f1.png",
     "index.html": "/anime-wizard/index.html",
-    "main.ad21120e.css.map": "/anime-wizard/static/css/main.ad21120e.css.map",
+    "main.f78cc8d8.css.map": "/anime-wizard/static/css/main.f78cc8d8.css.map",
     "main.0b3fed91.js.map": "/anime-wizard/static/js/main.0b3fed91.js.map",
     "787.9e8bc09e.chunk.js.map": "/anime-wizard/static/js/787.9e8bc09e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad21120e.css",
+    "static/css/main.f78cc8d8.css",
     "static/js/main.0b3fed91.js"
   ]
 }
